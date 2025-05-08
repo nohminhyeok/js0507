@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1></h1>
+	<h1></h1>
+	<h1></h1>
+	<h1></h1>
+	<h1></h1>
+	<h1></h1>
+	<h1></h1>
+	
+	<script>
+	
+		let t1 = document.querySelectorAll('h1');
+		console.log(t1);
+
+		let rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
+	
+		for (let i = rainbow.length - 1; i > 0; i--) {
+		    let j = Math.floor(Math.random() * (i + 1)); 
+		    [rainbow[i], rainbow[j]] = [rainbow[j], rainbow[i]]; 
+		}
+	
+		t1.forEach(function(item, index) {
+
+		    let textColor = rainbozw[index % rainbow.length];
+		    let bgColor = rainbow[(index + 1) % rainbow.length];
+	
+		    item.innerHTML = '안녕해';
+		    item.style.display = 'inline-block';
+		    item.style.color = textColor;
+		    item.style.backgroundColor = bgColor;
+		    item.style.padding = '10px';
+		    item.style.borderRadius = '20px';
+		});
+	
+		/*
+			t1.textContent = '컨트롤 스페이스 쓰셈';
+			t1.style.color = '#ffffff';
+			t1.style.backgroundColor = '#000000';
+			t1.style.padding = '10px';
+		*/
+	</script>	
+</body>
+</html>

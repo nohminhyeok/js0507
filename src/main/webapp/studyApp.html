@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Math Quiz</title>
+<style>
+    /* 전체 레이아웃 */
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* 카드 스타일 */
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 280px;
+    }
+
+    /* 제목 스타일 */
+    h2 {
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+    }
+
+    /* 입력 필드 스타일 */
+    .input-field {
+        width: 100%;
+        height: 50px;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        height: 60px;
+        width: 60px;
+        margin: 5px;
+        font-size: 1.4rem;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    /* 버튼 색상 */
+    .btn-primary { background-color: #3498db; }
+    .btn-danger { background-color: #e74c3c; }
+    .btn-warning { background-color: #f39c12; }
+    .btn-success { background-color: #2ecc71; }
+    .btn-empty { background-color: transparent; }
+
+    /* 버튼 그리드 레이아웃 */
+    .button-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        justify-content: center;
+    }
+</style>
+</head>
+<body>
+    <div class="card">
+        <h2>Study APP</h2>
+        <input type="text" id="question" class="input-field" readonly>
+        <input type="text" id="answer" class="input-field" readonly>
+        <div class="button-grid">
+            <button id="seven" class="btn btn-primary">7</button>
+            <button id="eight" class="btn btn-primary">8</button>
+            <button id="nine" class="btn btn-primary">9</button>
+            <button id="newQ" class="btn btn-success">문제</button>
+            
+            <button id="four" class="btn btn-primary">4</button>
+            <button id="five" class="btn btn-primary">5</button>
+            <button id="six" class="btn btn-primary">6</button>
+            <button class="btn btn-empty"></button>
+            
+            <button id="one" class="btn btn-primary">1</button>
+            <button id="two" class="btn btn-primary">2</button>
+            <button id="three" class="btn btn-primary">3</button>
+            <button class="btn btn-empty"></button>
+            
+            <button id="back" class="btn btn-danger">DEL</button>
+            <button id="zero" class="btn btn-primary">0</button>
+            <button id="minus" class="btn btn-warning">-</button>
+            <button id="result" class="btn btn-success">제출</button>
+        </div>
+    </div>
+</body>
+	
+	<script>
+		let question='';
+		let answer='';
+		let operator = '';
+		let a = [];
+		let b = [];
+		let correct = '';
+		
+		document.querySelector('#zero').addEventListener('click', function () {
+			answer += 0;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#one').addEventListener('click', function () {
+			answer += 1;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#two').addEventListener('click', function () {
+			answer += 2;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#three').addEventListener('click', function () {
+			answer += 3;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#four').addEventListener('click', function () {
+			answer += 4;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#five').addEventListener('click', function () {
+			answer += 5;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#six').addEventListener('click', function () {
+			answer += 6;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#seven').addEventListener('click', function () {
+			answer += 7;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#eight').addEventListener('click', function () {
+			answer += 8;
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#nine').addEventListener('click', function () {
+			answer += 9;
+			document.querySelector('#answer').value = answer;
+		});
+		
+		
+		document.querySelector('#back').addEventListener('click', function() {
+			answer = answer.slice(0,-1);
+			document.querySelector('#answer').value = answer;
+		})
+		document.querySelector('#minus').addEventListener('click', function () {
+			answer += '-';
+			document.querySelector('#answer').value = answer;
+		});
+		document.querySelector('#newQ').addEventListener('click', function() {
+			for(let i=0; i<101; i++){
+				a.push(i);
+				b.push(i);
+			}
+			for(let i=a.length-1; i>0; i--){
+				let j = Math.floor(Math.random() * (i+1));
+				[a[i], a[j]] = [a[j],a[i]];
+			}
+			for(let i=b.length-1; i>0; i--){
+				let j = Math.floor(Math.random() * (i+1));
+				[b[i], b[j]] = [b[j],b[i]];
+			}
+			let z = Math.floor(Math.random()*100);
+			let x = Math.floor(Math.random()*2);
+			let oper = ['+','-']
+			let az = a[z]
+			let bz = b[z]
+			question = az + ' ' + oper[x] + ' ' + bz;
+			document.querySelector('#question').value = question;
+			
+			correctAnswer = (oper[x] == '+') ? az + bz : az - bz;
+		})
+		
+		document.querySelector('#result').addEventListener('click', function () {
+        	if (answer == correctAnswer) {
+        	    alert('정답입니다!');
+       		 } else {
+        	    alert('오답입니다!');
+   			 }
+      		  answer = '';
+      		  document.querySelector('#answer').value = answer;
+   		 });
+		
+		// 페이지 로드 시 자동으로 문제 생성
+		window.onload = function() {
+		    // 새로운 문제 출력 함수 호출
+		    document.querySelector('#newQ').click();
+		};
+	</script>
+</html>
